@@ -15,11 +15,29 @@ class SettingsScreen extends StatelessWidget {
         title: Text('Stats App'),
       ),
       bottomNavigationBar: CustomBotNavBar(func1, func2, func3),
-      body: Center(
-        child: Container(
-          width: 50,
-          height: 50,
-          child: Text('Settings'),
+      body: Container(
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: MediaQuery.of(context).size.height * 0.9,
+        margin: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.1,
+            vertical: MediaQuery.of(context).size.height * 0.05),
+        child: Card(
+          elevation: 5,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                children: [
+                  Text('App Color Theme'),
+                ],
+              ),
+              Row(
+                children: [
+                  Text('Dark Mode'),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
