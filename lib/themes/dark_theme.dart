@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-class DarkTheme extends StatelessWidget {
+class DarkTheme {
   DarkTheme();
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
+  ThemeData buildDarkTheme() {
+    return ThemeData(brightness: Brightness.dark);
   }
 }

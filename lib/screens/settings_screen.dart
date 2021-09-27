@@ -2,11 +2,30 @@ import 'package:flutter/material.dart';
 
 import '../widgets/custom_bot_nav_bar.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   final Function func1;
   final Function func2;
   final Function func3;
-  SettingsScreen(this.func1, this.func2, this.func3);
+  final Function changeTheme;
+  const SettingsScreen(
+    this.func1,
+    this.func2,
+    this.func3,
+    this.changeTheme,
+  );
+
+  @override
+  _SettingsScreenState createState() =>
+      _SettingsScreenState(func1, func2, func3, changeTheme);
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  final Function func1;
+  final Function func2;
+  final Function func3;
+  final Function changeTheme;
+  bool isSwitched = false;
+  _SettingsScreenState(this.func1, this.func2, this.func3, this.changeTheme);
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +45,17 @@ class SettingsScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Row(
-                children: [
-                  Text('App Color Theme'),
-                ],
-              ),
-              Row(
-                children: [
-                  Text('Dark Mode'),
-                ],
-              )
+              Row(children: [
+                Text('Dark Theme'),
+                Switch(
+                    value: isSwitched,
+                    onChanged: (value) {
+                      setState(() {
+                        this.isSwitched = value;
+                        changeTheme(value);
+                      });
+                    })
+              ]),
             ],
           ),
         ),

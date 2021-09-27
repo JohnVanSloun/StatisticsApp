@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-class LightTheme extends StatelessWidget {
+class LightTheme {
   LightTheme();
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
+  ThemeData buildLightTheme() {
+    return ThemeData(brightness: Brightness.light);
   }
 }
