@@ -12,8 +12,10 @@ class PopupForm extends StatelessWidget {
         child: Form(
           key: _formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               TextFormField(
+                decoration: InputDecoration(labelText: 'Title'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return '';
@@ -22,6 +24,18 @@ class PopupForm extends StatelessWidget {
                 },
               ),
               TextFormField(
+                decoration:
+                    InputDecoration(labelText: 'Categorical X-Axis Data (csv)'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Quantitative Y-Axis Data (csv)'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return '';
@@ -39,7 +53,7 @@ class PopupForm extends StatelessWidget {
                     );
                   }
                 },
-                child: Text('Submit'),
+                child: Text('Submit Data'),
               ),
             ],
           ),

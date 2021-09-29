@@ -7,12 +7,7 @@ class SettingsScreen extends StatefulWidget {
   final Function func2;
   final Function func3;
   final Function changeTheme;
-  const SettingsScreen(
-    this.func1,
-    this.func2,
-    this.func3,
-    this.changeTheme,
-  );
+  const SettingsScreen(this.func1, this.func2, this.func3, this.changeTheme);
 
   @override
   _SettingsScreenState createState() =>
@@ -45,17 +40,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Row(children: [
-                Text('Dark Theme'),
-                Switch(
+              Row(
+                children: [
+                  Text('Dark Theme'),
+                  Switch(
                     value: isSwitched,
                     onChanged: (value) {
-                      setState(() {
-                        this.isSwitched = value;
-                        changeTheme(value);
-                      });
-                    })
-              ]),
+                      setState(
+                        () {
+                          this.isSwitched = value;
+                          changeTheme(value);
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
         ),
