@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_bot_nav_bar.dart';
+import '../widgets/new_chart.dart';
+import '../models/form_data.dart';
+import '../models/data_collection.dart';
 
 class DataLibraryScreen extends StatelessWidget {
   final Function func1;
   final Function func2;
   final Function func3;
   DataLibraryScreen(this.func1, this.func2, this.func3);
+
+  Widget _buildChart(BuildContext context, FormData data) {
+    return AlertDialog(
+      content: NewChart(data),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,108 +41,21 @@ class DataLibraryScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.7,
               child: ListView(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        color: Colors.amber,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.bar_chart),
-                      ),
-                      Container(
-                        color: Colors.blue,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.pie_chart),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        color: Colors.pink,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.bar_chart),
-                      ),
-                      Container(
-                        color: Colors.purple,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.pie_chart),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        color: Colors.green,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.bar_chart),
-                      ),
-                      Container(
-                        color: Colors.orange,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.pie_chart),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        color: Colors.amber,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.bar_chart),
-                      ),
-                      Container(
-                        color: Colors.blue,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.pie_chart),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        color: Colors.pink,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.bar_chart),
-                      ),
-                      Container(
-                        color: Colors.purple,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.pie_chart),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        color: Colors.pink,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.bar_chart),
-                      ),
-                      Container(
-                        color: Colors.purple,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        child: Icon(Icons.pie_chart),
-                      ),
-                    ],
-                  ),
+                  ...DataCollection.dataList
+                      .map((data) => ListTile(
+                            leading: Icon(
+                              Icons.pie_chart,
+                            ),
+                            title: Text("${data.title}"),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) =>
+                                    _buildChart(context, data),
+                              );
+                            },
+                          ))
+                      .toList()
                 ],
               ),
             ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/form_data.dart';
+import '../models/data_collection.dart';
+
 class PopupForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  PopupForm();
+  final FormData formData = FormData();
 
   Widget _buildPopupForm(BuildContext context) {
     return AlertDialog(
@@ -18,9 +21,12 @@ class PopupForm extends StatelessWidget {
                 decoration: InputDecoration(labelText: 'Title'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return '';
+                    return 'Please Enter a Title';
                   }
                   return null;
+                },
+                onSaved: (String? value) {
+                  formData.title = value;
                 },
               ),
               TextFormField(
@@ -28,9 +34,12 @@ class PopupForm extends StatelessWidget {
                     InputDecoration(labelText: 'Categorical X-Axis Data (csv)'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return '';
+                    return 'Please add comma seperated data.';
                   }
                   return null;
+                },
+                onSaved: (String? value) {
+                  formData.xValues = value;
                 },
               ),
               TextFormField(
@@ -38,9 +47,12 @@ class PopupForm extends StatelessWidget {
                     labelText: 'Quantitative Y-Axis Data (csv)'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return '';
+                    return 'Please add comma seperated data.';
                   }
                   return null;
+                },
+                onSaved: (String? value) {
+                  formData.yValues = value;
                 },
               ),
               ElevatedButton(
@@ -51,6 +63,9 @@ class PopupForm extends StatelessWidget {
                         content: Text('Processing Data'),
                       ),
                     );
+                    _formKey.currentState!.save();
+                    DataCollection.addData(formData);
+                    Navigator.pop(context);
                   }
                 },
                 child: Text('Submit Data'),
