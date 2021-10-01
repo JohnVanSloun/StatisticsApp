@@ -39,7 +39,7 @@ class PopupForm extends StatelessWidget {
                   return null;
                 },
                 onSaved: (String? value) {
-                  formData.xValues = value;
+                  formData.xValues = value!.split(',');
                 },
               ),
               TextFormField(
@@ -52,7 +52,7 @@ class PopupForm extends StatelessWidget {
                   return null;
                 },
                 onSaved: (String? value) {
-                  formData.yValues = value;
+                  formData.yValues = value!.split(',');
                 },
               ),
               ElevatedButton(
