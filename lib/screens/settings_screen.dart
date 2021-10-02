@@ -38,9 +38,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Card(
           elevation: 5,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text('Dark Theme'),
                   Switch(

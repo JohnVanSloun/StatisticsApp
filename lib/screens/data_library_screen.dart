@@ -11,12 +11,6 @@ class DataLibraryScreen extends StatelessWidget {
   final Function func3;
   DataLibraryScreen(this.func1, this.func2, this.func3);
 
-  Widget _buildChart(BuildContext context, FormData data) {
-    return AlertDialog(
-      content: NewChart(data),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +20,9 @@ class DataLibraryScreen extends StatelessWidget {
       bottomNavigationBar: CustomBotNavBar(func1, func2, func3),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height -
+            AppBar().preferredSize.height -
+            MediaQuery.of(context).padding.bottom,
         child: Column(
           children: [
             Container(
@@ -38,24 +34,23 @@ class DataLibraryScreen extends StatelessWidget {
             ),
             Container(
               width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.height * 0.7,
+              height: MediaQuery.of(context).size.height * 0.55,
               child: ListView(
                 children: [
-                  ...DataCollection.dataList
-                      .map((data) => ListTile(
-                            leading: Icon(
-                              Icons.pie_chart,
-                            ),
-                            title: Text("${data.title}"),
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) =>
-                                    _buildChart(context, data),
-                              );
-                            },
-                          ))
-                      .toList()
+                  ...DataCollection.dataList.map(
+                    (data) => ListTile(
+                      leading: Icon(
+                        Icons.pie_chart,
+                      ),
+                      title: Text("${data.title}"),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NewChart(data),
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

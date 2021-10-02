@@ -20,18 +20,23 @@ class NewChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Chart'),
+      ),
       body: Center(
         child: Container(
-            child: SfCartesianChart(
-          primaryXAxis: CategoryAxis(),
-          title: ChartTitle(text: data.title!),
-          series: <LineSeries<DataPoint, String>>[
-            LineSeries(
-                dataSource: <DataPoint>[..._buildDataPoints(data)],
-                xValueMapper: (DataPoint dataPoint, _) => dataPoint.x,
-                yValueMapper: (DataPoint dataPoint, _) => dataPoint.y),
-          ],
-        )),
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: SfCartesianChart(
+            primaryXAxis: CategoryAxis(),
+            title: ChartTitle(text: data.title!),
+            series: <LineSeries<DataPoint, String>>[
+              LineSeries(
+                  dataSource: <DataPoint>[..._buildDataPoints(data)],
+                  xValueMapper: (DataPoint dataPoint, _) => dataPoint.x,
+                  yValueMapper: (DataPoint dataPoint, _) => dataPoint.y),
+            ],
+          ),
+        ),
       ),
     );
   }
