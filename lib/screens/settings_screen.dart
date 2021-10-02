@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stats_app/screens/login_screen.dart';
 
 import '../widgets/custom_bot_nav_bar.dart';
 
@@ -20,6 +21,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final Function func3;
   final Function changeTheme;
   bool isSwitched = false;
+  bool isSignedIn = false;
   _SettingsScreenState(this.func1, this.func2, this.func3, this.changeTheme);
 
   @override
@@ -39,6 +41,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
           elevation: 5,
           child: Column(
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text('Profile'),
+                  isSignedIn
+                      ? Text('Signed in')
+                      : ElevatedButton(
+                          child: Text('Sign In'),
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreen(),
+                            ),
+                          ),
+                        ),
+                ],
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
